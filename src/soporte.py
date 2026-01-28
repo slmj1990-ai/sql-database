@@ -98,3 +98,88 @@ def unificar_juegos_duplicados(df):
             df['user_score'] = df['user_score'].round(1)
 
     return df
+
+
+######  TABLA SALES  ######
+
+#LIMPIEZA DE COLUMNAS
+#columnas a mantener
+columns_to_mantain = [
+    'title',
+    'genre',
+    'critic_score',
+    'total_sales',
+    'na_sales',
+    'jp_sales',
+    'other_sales'
+]
+
+df_sales = df_sales[columns_to_mantain]
+
+print(df_sales.columns)
+
+
+df_sales_cols = [
+    "total_sales",
+    "na_sales",
+    "jp_sales",
+    "pal_sales",
+    "other_sales"
+]
+
+
+#SUMAR Y UNIFICAR 
+#unificar titulos y ventas (suma y duplicados)
+
+df_sales_unified = (
+    df_sales
+    .groupby("title", as_index=False)
+    .agg({
+        "total_sales": "sum",
+        "na_sales": "sum",
+        "jp_sales": "sum",
+        "other_sales": "sum"
+    })
+)
+
+df_sales_grouped = df_sales_unified
+
+#ESTRUCTURA
+#ordenar por ventas totales
+df_sales_unified = df_sales_unified.sort_values(
+    by="total_sales",
+    ascending=False
+)
+
+df_sales_unified.head(25)
+
+#separar ventas 
+
+df_sales_grouped["sales_japan"] = df_sales_grouped["jp_sales"]
+
+df_sales_grouped["sales_non_japan"] = (
+    df_sales_grouped["na_sales"]
+    + df_sales_grouped["other_sales"]
+)
+
+df_sales_grouped["sales_total"] = df_sales_grouped["total_sales"]
+
+#REVISAR CAMBIOS E INFORMACION 
+df_sales_grouped.info()
+
+#LIMPIEZA DE TEXTO Y VALORES
+#convertir ceros a Nan
+import numpy as np
+
+df_sales.replace(0, np.nan, inplace=True)
+df_sales.dropna(inplace=True)
+
+#eliminar filas NaN
+df_sales.dropna(inplace=True)
+
+#verificacion
+df_sales.isna().sum()
+df_sales.shape
+
+#TABLA LIMPIA 
+df_sales.head()
