@@ -18,7 +18,7 @@ WHERE m.release_date >= '2015-01-01'
 GROUP BY s.genre
 ORDER BY ventas_totales DESC;
 
--- 2.1 Relación entre ventas y crítica ( meta_score y user_score)desde 2015 hasta 2024 ordenado por total ventas.
+-- 2.1 Relación entre ventas por genero y crítica ( meta_score y user_score)desde 2015 hasta 2024 ordenado por total ventas.
 
 SELECT
 s.genre,
@@ -79,7 +79,8 @@ on s.title = m.title
 where m. release_date >= '2015-01-01'
 GROUP BY genre
 HAVING ventas_totales_millones > 1
-ORDER BY dependecia_japon DESC;
+ORDER BY dependecia_japon DESC
+LIMIT 30;
     
     
 -- Identificación de juegos con éxito comercial (mas 1 millones) y éxito en critica ( igual o mas 70) fuera de japon
