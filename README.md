@@ -106,3 +106,5 @@ Problemas: Ausencia en Shooter ($144M/año, 2º mercado) y Crítica baja en gén
 - Incluir análisis de tendencias por año.
 - Analizar por rating ESRB para ver el impacto del público objetivo.
 
+## Presentación
+https://docs.google.com/presentation/d/1JMjWFIAsg1fML0m679EEew__TDFM4_ypX0coDScizd8/edit?slide=id.gf89d944118_0_545#slide=id.gf89d944118_0_545
